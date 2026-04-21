@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToe {
 
@@ -10,7 +11,7 @@ public class TicTacToe {
     public TicTacToe() {
         board = new char[3][3];
         initializeBoard();
-        tossPlayer(); // UC2 logic
+        tossPlayer();
     }
 
     private void initializeBoard() {
@@ -21,10 +22,9 @@ public class TicTacToe {
         }
     }
 
-    // UC2: Random toss logic
     private void tossPlayer() {
         Random rand = new Random();
-        int result = rand.nextInt(2); // 0 or 1
+        int result = rand.nextInt(2);
 
         if (result == 0) {
             player1Symbol = 'X';
@@ -39,6 +39,14 @@ public class TicTacToe {
         }
     }
 
+    // UC3: Take slot input (1–9)
+    public int getPlayerInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter slot (1-9): ");
+        int slot = sc.nextInt();
+        return slot;
+    }
+
     public void displayBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -51,5 +59,8 @@ public class TicTacToe {
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
         game.displayBoard();
+
+        int slot = game.getPlayerInput(); // UC3 call
+        System.out.println("You entered slot: " + slot);
     }
 }
