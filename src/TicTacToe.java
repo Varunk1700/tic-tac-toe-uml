@@ -1,9 +1,10 @@
-// UC4: Convert slot (1-9) to row and column
-public int[] convertSlotToPosition(int slot) {
-    slot = slot - 1; // convert to 0-based index
-
-    int row = slot / 3;
-    int col = slot % 3;
-
-    return new int[]{row, col};
+// UC5: Place move on board
+public boolean placeMove(int row, int col) {
+    if (board[row][col] == '-') {
+        board[row][col] = currentPlayer;
+        return true;
+    } else {
+        System.out.println("Invalid move! Cell already occupied.");
+        return false;
+    }
 }
