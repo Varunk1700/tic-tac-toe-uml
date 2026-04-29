@@ -7,42 +7,34 @@ public class Main {
         }
     }
 
-    // UC9: Check win
-    public static boolean checkWin(char[][] board, char symbol) {
+    // UC10: Check draw
+    public static boolean isDraw(char[][] board) {
 
-        // Check rows & columns
         for (int i = 0; i < 3; i++) {
-            if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol)
-                return true;
-
-            if (board[0][i] == symbol && board[1][i] == symbol && board[2][i] == symbol)
-                return true;
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == ' ') {
+                    return false; // still empty space
+                }
+            }
         }
 
-        // Check diagonals
-        if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol)
-            return true;
-
-        if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol)
-            return true;
-
-        return false;
+        return true; // no empty cells → draw
     }
 
     public static void main(String[] args) {
 
         char[][] board = {
-            {'X', 'X', 'X'},
-            {' ', 'O', ' '},
-            {'O', ' ', ' '}
+            {'X', 'O', 'X'},
+            {'X', 'O', 'O'},
+            {'O', 'X', 'X'}
         };
 
         printBoard(board);
 
-        if (checkWin(board, 'X')) {
-            System.out.println("X wins!");
+        if (isDraw(board)) {
+            System.out.println("It's a draw!");
         } else {
-            System.out.println("No winner yet");
+            System.out.println("Game still in progress");
         }
     }
 }
