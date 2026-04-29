@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Main {
 
     // Print board
@@ -9,34 +7,42 @@ public class Main {
         }
     }
 
-    // UC7: Computer move
-    public static void computerMove(char[][] board) {
-        Random rand = new Random();
+    // UC9: Check win
+    public static boolean checkWin(char[][] board, char symbol) {
 
-        while (true) {
-            int slot = rand.nextInt(9) + 1;
+        // Check rows & columns
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol)
+                return true;
 
-            int row = (slot - 1) / 3;
-            int col = (slot - 1) % 3;
-
-            if (board[row][col] == ' ') {
-                board[row][col] = 'O';
-                break;
-            }
+            if (board[0][i] == symbol && board[1][i] == symbol && board[2][i] == symbol)
+                return true;
         }
+
+        // Check diagonals
+        if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol)
+            return true;
+
+        if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol)
+            return true;
+
+        return false;
     }
 
     public static void main(String[] args) {
 
         char[][] board = {
-            {' ', ' ', ' '},
-            {' ', ' ', ' '},
-            {' ', ' ', ' '}
+            {'X', 'X', 'X'},
+            {' ', 'O', ' '},
+            {'O', ' ', ' '}
         };
 
-        // Computer plays
-        computerMove(board);
-
         printBoard(board);
+
+        if (checkWin(board, 'X')) {
+            System.out.println("X wins!");
+        } else {
+            System.out.println("No winner yet");
+        }
     }
 }
